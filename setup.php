@@ -277,8 +277,6 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 							article_reads MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
 							article_allow_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
 							article_allow_ratings TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
-                            article_meta_description VARCHAR (200) NOT NULL DEFAULT '',
-                            article_meta_keywords VARCHAR (250) NOT NULL DEFAULT '',
 							PRIMARY KEY (article_id),
 							KEY article_cat (article_cat),
 							KEY article_datestamp (article_datestamp),
@@ -294,8 +292,6 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 							article_cat_description VARCHAR(200) NOT NULL DEFAULT '',
 							article_cat_sorting VARCHAR(50) NOT NULL DEFAULT 'article_subject ASC',
 							article_cat_access TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
-                            article_cat_meta_description VARCHAR (200) NOT NULL DEFAULT '',
-                            article_cat_meta_keywords VARCHAR (250) NOT NULL DEFAULT '',
 							PRIMARY KEY (article_cat_id),
 							KEY article_cat_access (article_cat_access)
 							) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci;");
@@ -365,8 +361,6 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 							page_content TEXT NOT NULL,
 							page_allow_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 							page_allow_ratings TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
-                            page_meta_description VARCHAR (200) NOT NULL DEFAULT '',
-                            page_meta_keywords VARCHAR (250) NOT NULL DEFAULT '',
 							PRIMARY KEY (page_id)
 							) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci;");
 
@@ -379,8 +373,6 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 							download_cat_description TEXT NOT NULL,
 							download_cat_sorting VARCHAR(50) NOT NULL DEFAULT 'download_title ASC',
 							download_cat_access TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
-                            download_cat_meta_description VARCHAR (200) NOT NULL DEFAULT '',
-                            download_cat_keywords VARCHAR (250) NOT NULL DEFAULT '',
 							PRIMARY KEY (download_cat_id)
 							) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci;");
 
@@ -408,8 +400,6 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 							download_count INT(10) UNSIGNED NOT NULL DEFAULT '0',
 							download_allow_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 							download_allow_ratings TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
-                            download_meta_description VARCHAR (200) NOT NULL DEFAULT '',
-                            download_meta_keywords VARCHAR (250) NOT NULL DEFAULT '',
 							PRIMARY KEY (download_id),
 							KEY download_datestamp (download_datestamp)
 							) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci;");
@@ -439,8 +429,6 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 							faq_cat_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
 							faq_cat_name VARCHAR(200) NOT NULL DEFAULT '',
 							faq_cat_description VARCHAR(250) NOT NULL DEFAULT '',
-                            faq_cat_meta_description VARCHAR (200) NOT NULL DEFAULT '',
-                            faq_cat_meta_keywords VARCHAR (250) NOT NULL DEFAULT '',
 							PRIMARY KEY(faq_cat_id)
 							) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci;");
 
@@ -548,8 +536,6 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 							forum_threadcount MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
 							forum_lastuser MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
 							forum_merge TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
-                            forum_meta_description VARCHAR (200) NOT NULL DEFAULT '',
-                            forum_meta_keywords VARCHAR (250) NOT NULL DEFAULT '',
 							PRIMARY KEY (forum_id),
 							KEY forum_order (forum_order),
 							KEY forum_lastpost (forum_lastpost),
@@ -619,8 +605,6 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 							news_sticky TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 							news_allow_comments TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
 							news_allow_ratings TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
-                            news_meta_description VARCHAR (200) NOT NULL DEFAULT '',
-                            news_meta_keywords VARCHAR (250) NOT NULL DEFAULT '',
 							PRIMARY KEY (news_id),
 							KEY news_datestamp (news_datestamp),
 							KEY news_reads (news_reads)
@@ -633,8 +617,6 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 							news_cat_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
 							news_cat_name VARCHAR(100) NOT NULL DEFAULT '',
 							news_cat_image VARCHAR(100) NOT NULL DEFAULT '',
-                            news_cat_meta_description VARCHAR (200) NOT NULL DEFAULT '',
-                            news_cat_meta_keywords VARCHAR (250) NOT NULL DEFAULT '',
 							PRIMARY KEY (news_cat_id)
 							) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci;");
 
@@ -716,8 +698,6 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 							album_access SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0',
 							album_order SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0',
 							album_datestamp INT(10) UNSIGNED NOT NULL DEFAULT '0',
-                            album_meta_description VARCHAR (200) NOT NULL DEFAULT '',
-                            album_meta_keywords VARCHAR (250) NOT NULL DEFAULT '',
 							PRIMARY KEY (album_id),
 							KEY album_order (album_order),
 							KEY album_datestamp (album_datestamp)
@@ -740,8 +720,6 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 							photo_order SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0',
 							photo_allow_comments tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
 							photo_allow_ratings tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
-                            photo_meta_description VARCHAR (200) NOT NULL DEFAULT '',
-                            photo_meta_keywords VARCHAR (250) NOT NULL DEFAULT '',
 							PRIMARY KEY (photo_id),
 							KEY photo_order (photo_order),
 							KEY photo_datestamp (photo_datestamp)
@@ -1016,8 +994,6 @@ if (isset($_POST['step']) && $_POST['step'] == "4") {
 							weblink_cat_description TEXT NOT NULL,
 							weblink_cat_sorting VARCHAR(50) NOT NULL DEFAULT 'weblink_name ASC',
 							weblink_cat_access TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
-                            weblink_cat_meta_description VARCHAR (200) NOT NULL DEFAULT '',
-                            weblink_cat_meta_keywords VARCHAR (250) NOT NULL DEFAULT '',
 							PRIMARY KEY(weblink_cat_id)
 							) ENGINE=MyISAM DEFAULT CHARSET=UTF8 COLLATE=utf8_unicode_ci;");
 
