@@ -51,9 +51,6 @@ else { $_GET['order'] = 0; }
 if (isset($_GET['chars'])) { $_GET['chars'] = isnum($_GET['chars']) ? ($_GET['chars'] > 200 ? 200 : $_GET['chars']) : 50; }
 else { $_GET['chars'] = 50; }
 
-if (isset($_GET['forum_id'])) { $_GET['forum_id'] = isnum($_GET['forum_id']) ? $_GET['forum_id'] : 0; }
-else { $_GET['forum_id'] = 0; }
-
 $radio_button = array();
 $form_elements = array();
 $available = array();
@@ -234,7 +231,7 @@ function search_navigation($rows) {
 	return $navigation_result;
 }
 
-$composevars = "method=".$_GET['method']."&amp;datelimit=".$_GET['datelimit']."&amp;fields=".$_GET['fields']."&amp;sort=".$_GET['sort']."&amp;order=".$_GET['order']."&amp;chars=".$_GET['chars']."&amp;forum_id=".$_GET['forum_id']."&amp;";
+$composevars = "method=".$_GET['method']."&amp;datelimit=".$_GET['datelimit']."&amp;fields=".$_GET['fields']."&amp;sort=".$_GET['sort']."&amp;order=".$_GET['order']."&amp;chars=".$_GET['chars']."&amp;";
 
 $memory_limit = str_replace("m", "", strtolower(ini_get("memory_limit"))) * 1024 * 1024;
 $memory_limit = !isnum($memory_limit) ? 8 * 1024 * 1024 : $memory_limit < 8 * 1024 * 1024 ? 8 * 1024 * 1024 : $memory_limit;

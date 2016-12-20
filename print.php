@@ -93,75 +93,6 @@ if ((isset($_GET['type']) && $_GET['type'] == "A") && (isset($_GET['item_id']) &
 		}
 	}
 	if (!$res) { redirect("index.php"); }
-} elseif ((isset($_GET['type']) && $_GET['type'] == "F") && (isset($_GET['thread']) && isnum($_GET['thread'])) && !isset($_GET['post'])) {
-	$posts_per_page = 20;
-	if (!isset($_GET['rowstart']) || !isnum($_GET['rowstart'])) { $_GET['rowstart'] = 0; }
-
-	$result = dbquery(
-		"SELECT fp.post_message, fp.post_datestamp, fp.post_edittime, fp.post_author, fp.post_edituser,
-		fu.user_name AS user_name, fu.user_status AS user_status, fe.user_name AS edit_name, fe.user_status AS edit_status,
-		ft.thread_subject, ff.forum_access
-		FROM ".DB_THREADS." ft
-		INNER JOIN ".DB_POSTS." fp ON ft.thread_id = fp.thread_id
-		INNER JOIN ".DB_FORUMS." ff ON ff.forum_id = ft.forum_id
-		INNER JOIN ".DB_USERS." fu ON fu.user_id = fp.post_author
-		LEFT JOIN ".DB_USERS." fe ON fe.user_id = fp.post_edituser
-		WHERE ft.thread_id=".$_GET['thread']."
-		ORDER BY fp.post_datestamp
-		LIMIT ".$_GET['rowstart'].",$posts_per_page"
-	);
-	$res = false; $i = 0;
-	if (dbrows($result)) {
-		while ($data = dbarray($result)) {
-			if (checkgroup($data['forum_access'])) {
-				$res = true;
-				if ($i == 0) echo $locale['500']." <strong>".$settings['sitename']." :: ".$data['thread_subject']."</strong><hr /><br />\n";
-				echo "<div style='margin-left:20px'>\n";
-				echo "<div style='float:left'>".$locale['501'].profile_link($data['post_author'], $data['user_name'], $data['user_status']).$locale['502'].showdate("forumdate", $data['post_datestamp'])."</div><div style='float:right'>#".($i+1)."</div><div style='float:none;clear:both'></div><hr />\n";
-				echo nl2br(parseubb(parsesmileys($data['post_message'])));
-				if ($data['edit_name']!='') {
-					echo "<div style='margin-left:20px'>\n<hr />\n";
-					echo $locale['503'].profile_link($data['post_edituser'], $data['edit_name'], $data['edit_status']).$locale['502'].showdate("forumdate", $data['post_edittime']);
-					echo "</div>\n";
-				}
-				echo "</div>\n";
-				echo "<br />\n";
-				$i++;
-			}
-		}
-	}
-	if (!$res) { redirect("index.php"); }
-} elseif ((isset($_GET['type']) && $_GET['type'] == "F") && (isset($_GET['thread']) && isnum($_GET['thread'])) && (isset($_GET['post']) && isnum($_GET['post'])) && (isset($_GET['nr']) && isnum($_GET['nr']))) {
-	$result = dbquery(
-		"SELECT fp.post_message, fp.post_datestamp, fp.post_edittime, fp.post_author as post_author, fp.post_edituser,
-		fu.user_name AS user_name, fu.user_status AS user_status, fe.user_name AS edit_name, fe.user_status AS edit_status,
-		ft.thread_subject, ff.forum_access
-		FROM ".DB_THREADS." ft
-		INNER JOIN ".DB_POSTS." fp ON ft.thread_id = fp.thread_id
-		INNER JOIN ".DB_FORUMS." ff ON ff.forum_id = ft.forum_id
-		INNER JOIN ".DB_USERS." fu ON fu.user_id = fp.post_author
-		LEFT JOIN ".DB_USERS." fe ON fe.user_id = fp.post_edituser
-		WHERE ft.thread_id=".$_GET['thread']." AND fp.post_id = ".$_GET['post']
-	);
-	$res = false;
-	if (dbrows($result)) {
-		$data = dbarray($result);
-		if (checkgroup($data['forum_access'])) {
-			$res = true;
-			echo $locale['500']." <strong>".$settings['sitename']." :: ".$data['thread_subject']."</strong><hr /><br />\n";
-			echo "<div style='margin-left:20px'>\n";
-			echo "<div style='float:left'>".$locale['501'].profile_link($data['post_author'], $data['user_name'], $data['user_status']).$locale['502'].showdate("forumdate", $data['post_datestamp'])."</div><div style='float:right'>#".$_GET['nr']."</div><div style='float:none;clear:both'></div><hr />\n";
-			echo nl2br(parseubb(parsesmileys($data['post_message'])));
-			if ($data['edit_name'] != "") {
-				echo "<div style='margin-left:20px'>\n<hr />\n";
-				echo $locale['503'].profile_link($data['post_edituser'], $data['edit_name'], $data['edit_status']).$locale['502'].showdate("forumdate", $data['post_edittime']);
-				echo "</div>\n";
-			}
-			echo "</div>\n";
-			echo "<br />\n";
-		}
-	}
-	if (!$res) { redirect("index.php"); }
 } elseif (isset($_GET['type']) && $_GET['type'] == "T" && $settings['enable_terms'] == 1) {
 	echo "<strong>".$settings['sitename']." ".$locale['600']."</strong><br />\n";
 	echo "<span class='small'>".$locale['601']." ".ucfirst(showdate("longdate", $settings['license_lastupdate']))."</span>\n";
@@ -175,5 +106,5 @@ if (ob_get_length() !== FALSE){
 	ob_end_flush();
 }
 
-mysql_close($db_connect);
+$pdo = null;
 ?>

@@ -112,48 +112,6 @@ function send_pm($to, $from, $subject, $message, $smileys = "y") {
 	return $error;
 }
 
-// Upload file function
-function upload_file(
-	$source_file, $target_file = "", $target_folder = DOWNLOADS, $valid_ext = ".zip,.rar,.tar,.bz2,.7z",
-	$max_size = "15000", $query = ""
-) {
-	if (is_uploaded_file($_FILES[$source_file]['tmp_name'])) {
-		$valid_ext = explode(",", $valid_ext);
-		$file = $_FILES[$source_file];
-		if ($target_file == "" || preg_match("/[^a-zA-Z0-9_-]/", $target_file)) {
-			$target_file = stripfilename(substr($file['name'], 0, strrpos($file['name'], ".")));
-		}
-		$file_ext = strtolower(strrchr($file['name'],"."));
-		$file_dest = $target_folder;
-		$upload_file = array(
-			"source_file" => $source_file, "source_size" => $file['size'], "source_ext" => $file_ext, "target_file" => $target_file.$file_ext,
-			"target_folder" => $target_folder, "valid_ext" => $valid_ext, "max_size" => $max_size, "query" => $query,
-			"error" => 0
-		);
-		if ($file['size'] > $max_size){
-			// Maximum file size exceeded
-			$upload_file['error'] = 1;
-		} elseif (!in_array($file_ext, $valid_ext)) {
-			// Invalid file extension
-			$upload_file['error'] = 2;
-		} else {
-			$target_file = filename_exists($target_folder, $target_file.$file_ext);
-			$upload_file['target_file'] = $target_file;
-			move_uploaded_file($file['tmp_name'], $target_folder.$target_file);
-			if (function_exists("chmod")) { chmod($target_folder.$target_file, 0644); }
-			if ($query && !dbquery($query)) {
-				// Invalid query string
-				$upload_file['error'] = 3;
-				unlink($target_folder.$target_file);
-			}
-		}
-	} else {
-		// File not uploaded
-		$upload_file = array("error" => 4);
-	}
-	return $upload_file;
-}
-
 // Upload image function
 function upload_image(
 	$source_image, $target_name = "", $target_folder = IMAGES, $target_width = "1800", $target_height = "1600",

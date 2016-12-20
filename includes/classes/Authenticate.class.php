@@ -259,10 +259,10 @@ class Authenticate {
 					$lastvisit = $_COOKIE[COOKIE_LASTVISIT];
 				}
 			} else {
-				$update_threads = true;
+				//$update_threads = true;
 				$lastvisit = $userdata['user_lastvisit'];
 			}         
-			if ($update_threads) { dbquery("UPDATE ".DB_USERS." SET user_threads='' WHERE user_id='".$userdata['user_id']."'"); }
+			//if ($update_threads) { dbquery("UPDATE ".DB_USERS." SET user_threads='' WHERE user_id='".$userdata['user_id']."'"); }
 		} else {
 			if ($cookie_exists) {
 				if ($_COOKIE[COOKIE_LASTVISIT] > $guest_lastvisit) {

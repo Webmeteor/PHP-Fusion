@@ -72,24 +72,6 @@ if (dbrows($result)) {
 					$i++;
 				}
 				continue;
-			case "P":
-				$access = dbquery("	SELECT photo_id FROM ".DB_PHOTOS." p, ".DB_PHOTO_ALBUMS." a WHERE
-									p.photo_id='".$data['comment_item_id']."' AND
-									p.album_id=a.album_id AND
-									".groupaccess('a.album_access')
-									);
-				if (dbrows($access) > 0) {
-					$comment = trimlink($data['comment_message'], 23);
-					$commentStart = dbcount("(comment_id)", DB_COMMENTS, "comment_item_id='".$data['comment_item_id']."' AND comment_type='P' AND comment_id<=".$data['comment_id']);
-					if ($commentStart > $settings['comments_per_page']) {
-						$commentStart = "&amp;c_start=".floor($commentStart / $settings['comments_per_page']) * $settings['comments_per_page'];
-					} else {
-						$commentStart = "";
-					}
-					$output .= THEME_BULLET." <a href='".BASEDIR."photogallery.php?photo_id=".$data['comment_item_id'].$commentStart."#c".$data['comment_id']."' title='".$comment."' class='side'>".$comment."</a><br />\n";
-					$i++;
-				}
-				continue;
 			case "C":
 				$access = dbcount("(page_id)", DB_CUSTOM_PAGES, "page_id='".$data['comment_item_id']."' AND ".groupaccess('page_access'));
 				if ($access > 0) {
@@ -101,24 +83,6 @@ if (dbrows($result)) {
 						$commentStart = "";
 					}
 					$output .= THEME_BULLET." <a href='".BASEDIR."viewpage.php?page_id=".$data['comment_item_id'].$commentStart."#c".$data['comment_id']."' title='".$comment."' class='side'>".$comment."</a><br />\n";
-					$i++;
-				}
-				continue;
-			case "D":
-				$access = dbquery("	SELECT download_id FROM ".DB_DOWNLOADS." d, ".DB_DOWNLOAD_CATS." c WHERE
-									d.download_id='".$data['comment_item_id']."' AND
-									d.download_cat=c.download_cat_id AND
-									".groupaccess('c.download_cat_access')
-									);
-				if (dbrows($access) > 0) {
-					$comment = trimlink($data['comment_message'], 23);
-					$commentStart = dbcount("(comment_id)", DB_COMMENTS, "comment_item_id='".$data['comment_item_id']."' AND comment_type='D' AND comment_id<=".$data['comment_id']);
-					if ($commentStart > $settings['comments_per_page']) {
-						$commentStart = "&amp;c_start=".floor($commentStart / $settings['comments_per_page']) * $settings['comments_per_page'];
-					} else {
-						$commentStart = "";
-					}
-					$output .= THEME_BULLET." <a href='".BASEDIR."downloads.php?download_id=".$data['comment_item_id'].$commentStart."#c".$data['comment_id']."' title='".$comment."' class='side'>".$comment."</a><br />\n";
 					$i++;
 				}
 				continue;

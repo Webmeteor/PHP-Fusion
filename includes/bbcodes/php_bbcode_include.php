@@ -31,11 +31,7 @@ for($i=0; $i<count($matches[0]); $i++) {
 	$h = new PHP_Highlight;
 	$h->loadString($start_php.$input.$end_php);
 	$parsed = $h->toList(true, true, false);
-	if (preg_match("/\/forum\//i", FUSION_REQUEST) && isset($data['post_id'])) {
-		$php_save = "<a href='".INCLUDES."bbcodes/php_bbcode_save.php?thread_id=".$_GET['thread_id']."&amp;post_id=".$data['post_id']."&amp;code_id=".$i."'><img src='".INCLUDES."bbcodes/images/php_save.png' alt='".$locale['bb_php_save']."' title='".$locale['bb_php_save']."' style='border:none' /></a>&nbsp;&nbsp;";
-	} else {
-		$php_save = "";
-	}   
+    $php_save = "";
 	$text2 = "<div class='tbl-border tbl2' style='width:400px'>".$php_save."<strong>".$locale['bb_php']."</strong></div><div class='tbl-border tbl1' style='width:400px;height:auto;white-space:nowrap;overflow:auto;background-color:#ffffff;'>".$parsed."</div>";
 	$text = str_replace($matches[0][$i], $text2, $text);
 	$text = str_replace("<ol>\n", "<ol>", $text);

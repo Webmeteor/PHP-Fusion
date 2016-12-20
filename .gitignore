@@ -46,34 +46,12 @@ fabric.properties
 # PHP-Fusion related
 ###
 
+# Config
+config.php
+
 # Themes
 /themes/*
 !/themes/templates
 !/themes/index.php
 !/themes/Gillette
 !/themes/Stylo
-
-# Downloads
-/downloads/*
-!/downloads/images
-!/downloads/submissions
-
-/downloads/images/*
-!/downloads/images/index.php
-!/downloads/images/no_image.jpg
-
-/downloads/submissions/*
-!/downloads/submissions/images
-!/downloads/submissions/index.php
-
-/downloads/submissions/images/*
-!/downloads/submissions/images/index.php
-
-# Forum
-/forum/attachments/*
-!/forum/attachments/index.php
-
-# Upload
-/ftp_upload/*
-!/ftp_upload/index.php
-

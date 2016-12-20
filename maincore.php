@@ -87,8 +87,11 @@ if(isset($_FILES) && count($_FILES)) {
 	unset($mime_types);
 }
 
+// Include PDO Database Driver
+require_once BASEDIR."includes/pdo_database_driver.php";
+
 // Establish mySQL database connection
-$link = dbconnect($db_host, $db_user, $db_pass, $db_name);
+$db_connect = dbconnect($db_host, $db_user, $db_pass, $db_name);
 unset($db_host, $db_user, $db_pass);
 
 // Fetch the settings from the database
@@ -123,19 +126,15 @@ define("QUOTES_GPC", (ini_get('magic_quotes_gpc') ? TRUE : FALSE));
 // Path definitions
 define("ADMIN", BASEDIR."administration/");
 define("CLASSES", BASEDIR."includes/classes/");
-define("DOWNLOADS", BASEDIR."downloads/");
 define("IMAGES", BASEDIR."images/");
 define("IMAGES_A", IMAGES."articles/");
 define("IMAGES_N", IMAGES."news/");
 define("IMAGES_N_T", IMAGES."news/thumbs/");
 define("IMAGES_NC", IMAGES."news_cats/");
-define("RANKS", IMAGES."ranks/");
 define("INCLUDES", BASEDIR."includes/");
 define("LOCALE", BASEDIR."locale/");
 define("LOCALESET", $settings['locale']."/");
-define("FORUM", BASEDIR."forum/");
 define("INFUSIONS", BASEDIR."infusions/");
-define("PHOTOS", IMAGES."photoalbum/");
 define("THEMES", BASEDIR."themes/");
 
 // Variables initializing
@@ -144,8 +143,6 @@ $mysql_queries_time = array();
 $smiley_cache = "";
 $bbcode_cache = "";
 $groups_cache = "";
-$forum_rank_cache = "";
-$forum_mod_rank_cache = "";
 $locale = array();
 
 // Calculate current true url
@@ -209,97 +206,6 @@ if (!isset($_COOKIE[COOKIE_PREFIX.'visited'])) {
 	setcookie(COOKIE_PREFIX."visited", "yes", time() + 31536000, "/", "", "0");
 }
 $lastvisited = Authenticate::setLastVisitCookie();
-
-// MySQL database functions
-function dbquery($query) {
-	global $mysql_queries_count, $mysql_queries_time; $mysql_queries_count++;
-
-	$query_time = get_microtime();
-	$result = @mysql_query($query);
-	$query_time = substr((get_microtime() - $query_time),0,7);
-
-	$mysql_queries_time[$mysql_queries_count] = array($query_time, $query);
-
-	if (!$result) {
-		echo mysql_error();
-		return false;
-	} else {
-		return $result;
-	}
-}
-
-function dbcount($field, $table, $conditions = "") {
-	global $mysql_queries_count, $mysql_queries_time; $mysql_queries_count++;
-
-	$cond = ($conditions ? " WHERE ".$conditions : "");
-	$query_time = get_microtime();
-	$result = @mysql_query("SELECT Count".$field." FROM ".$table.$cond);
-	$query_time = substr((get_microtime() - $query_time),0,7);
-
-	$mysql_queries_time[$mysql_queries_count] = array($query_time, "SELECT COUNT".$field." FROM ".$table.$cond);
-
-	if (!$result) {
-		echo mysql_error();
-		return false;
-	} else {
-		$rows = mysql_result($result, 0);
-		return $rows;
-	}
-}
-
-function dbresult($query, $row) {
-	global $mysql_queries_count, $mysql_queries_time;
-
-	$query_time = get_microtime();
-	$result = @mysql_result($query, $row);
-	$query_time = substr((get_microtime() - $query_time),0,7);
-
-	$mysql_queries_time[$mysql_queries_count] = array($query_time, $query);
-
-	if (!$result) {
-		echo mysql_error();
-		return false;
-	} else {
-		return $result;
-	}
-}
-
-function dbrows($query) {
-	$result = @mysql_num_rows($query);
-	return $result;
-}
-
-function dbarray($query) {
-	$result = @mysql_fetch_assoc($query);
-	if (!$result) {
-		echo mysql_error();
-		return false;
-	} else {
-		return $result;
-	}
-}
-
-function dbarraynum($query) {
-	$result = @mysql_fetch_row($query);
-	if (!$result) {
-		echo mysql_error();
-		return false;
-	} else {
-		return $result;
-	}
-}
-
-function dbconnect($db_host, $db_user, $db_pass, $db_name) {
-	global $db_connect;
-
-	$db_connect = @mysql_connect($db_host, $db_user, $db_pass);
-	$db_select = @mysql_select_db($db_name);
-	if (!$db_connect) {
-		die("<strong>Unable to establish connection to MySQL</strong><br />".mysql_errno()." : ".mysql_error());
-	} elseif (!$db_select) {
-		die("<strong>Unable to select MySQL database</strong><br />".mysql_errno()." : ".mysql_error());
-	}
-}
 
 // Set theme
 set_theme($userdata['user_theme']);
@@ -512,7 +418,7 @@ function parsesmileys($message) {
 	return $message;
 }
 
-// Show smiley icons in comments, forum and other post pages
+// Show smiley icons in comments and other post pages
 function displaysmileys($textarea, $form = "inputform") {
 	global $smiley_cache;
 	$smileys = ""; $i = 0;
@@ -912,7 +818,7 @@ function showdate($format, $val) {
 	} else {
 		$offset = $settings['timeoffset']+$settings['serveroffset'];
 	}
-	if ($format == "shortdate" || $format == "longdate" || $format == "forumdate" || $format == "newsdate") {
+	if ($format == "shortdate" || $format == "longdate" || $format == "newsdate") {
 		return strftime($settings[$format], $val + ($offset * 3600));
 	} else {
 		return strftime($format, $val + ($offset * 3600));

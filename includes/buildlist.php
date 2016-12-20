@@ -50,37 +50,6 @@ while ($file = readdir($temp)) {
 }
 closedir($temp);
 
-// photoalbum -------------------
-$result = dbquery("
-	SELECT ".DB_PHOTO_ALBUMS.".album_title, ".DB_PHOTOS.".photo_id
-	FROM ".DB_PHOTO_ALBUMS.", ".DB_PHOTOS."
-	WHERE ".DB_PHOTO_ALBUMS.".album_id = ".DB_PHOTOS.".album_id 
-");
-
-$album = array();
-
-while ($data = dbarray($result)) {
-	$album[] = $data['album_title'];
-	$album[] = $data['photo_id'];
-}
-
-$temp = opendir(PHOTOS);
-while ($file = readdir($temp)) {
-	if (!in_array($file, array(".", "..", "/", "index.php")) && !is_dir(PHOTOS.$file)) {
-		$slut = strpos($file,".");
-		$smlg = substr($file,0,$slut);
-		$navn = "";
-		for ($i = 1; $i < count($album); $i = $i + 2){
-			if ($smlg == $album[$i]) {
-				$navn = $album[$i - 1];
-				break;
-			}
-		}
-		$image_files[] = "['".$navn." album: ".$file."','".$settings['siteurl']."images/photoalbum/".$file."'], ";
-	}
-}
-closedir($temp);
-
 sort($image_files);
 
 // compile list -----------------

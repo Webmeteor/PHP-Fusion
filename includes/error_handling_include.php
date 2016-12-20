@@ -48,7 +48,7 @@ function setError($error_level, $error_message, $error_file, $error_line, $error
 				'0', '".time()."'
 			)"
 		);
-		$errorId = mysql_insert_id();
+		$errorId = dblastid();
 	} else {
 		$data = dbarray($result);
 		$errorId = $data['error_id'];

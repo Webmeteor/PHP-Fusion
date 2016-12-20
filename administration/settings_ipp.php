@@ -39,8 +39,6 @@ if (isset($_POST['savesettings'])) {
 	if (!$result) { $error = 1; }
 	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".(isnum($_POST['articles_per_page']) && $_POST['articles_per_page'] > 0 ? $_POST['articles_per_page'] : "15")."' WHERE settings_name='articles_per_page'");
 	if (!$result) { $error = 1; }
-	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".(isnum($_POST['downloads_per_page']) && $_POST['downloads_per_page'] > 0 ? $_POST['downloads_per_page'] : "15")."' WHERE settings_name='downloads_per_page'");
-	if (!$result) { $error = 1; }
 	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".(isnum($_POST['links_per_page']) && $_POST['links_per_page'] > 0 ? $_POST['links_per_page'] : "15")."' WHERE settings_name='links_per_page'");
 	if (!$result) { $error = 1; }
 	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".(isnum($_POST['comments_per_page']) && $_POST['comments_per_page'] ? $_POST['comments_per_page'] : "10")."' WHERE settings_name='comments_per_page'");
@@ -62,12 +60,6 @@ echo "<td width='50%' class='tbl'><input type='text' name='newsperpage' value='"
 echo "</tr>\n<tr>\n";
 echo "<td width='50%' class='tbl'>".$locale['910'].":</td>\n";
 echo "<td width='50%' class='tbl'><input type='text' name='articles_per_page' value='".$settings2['articles_per_page']."' maxlength='2' class='textbox' style='width:50px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['911'].":</td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='downloads_per_page' value='".$settings2['downloads_per_page']."' maxlength='2' class='textbox' style='width:50px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td width='50%' class='tbl'>".$locale['912'].":</td>\n";
-echo "<td width='50%' class='tbl'><input type='text' name='links_per_page' value='".$settings2['links_per_page']."' maxlength='2' class='textbox' style='width:50px;' /></td>\n";
 echo "</tr>\n<tr>\n";
 echo "<td width='50%' class='tbl'>".$locale['913'].":</td>\n";
 echo "<td width='50%' class='tbl'><input type='text' name='comments_per_page' value='".$settings2['comments_per_page']."' maxlength='2' class='textbox' style='width:50px;' /></td>\n";

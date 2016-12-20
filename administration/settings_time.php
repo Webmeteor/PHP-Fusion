@@ -39,8 +39,6 @@ if (isset($_POST['savesettings'])) {
 	if (!$result) { $error = 1; }
 	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".stripinput($_POST['longdate'])."' WHERE settings_name='longdate'");
 	if (!$result) { $error = 1; }
-	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".stripinput($_POST['forumdate'])."' WHERE settings_name='forumdate'");
-	if (!$result) { $error = 1; }
 	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".stripinput($_POST['newsdate'])."' WHERE settings_name='newsdate'");
 	if (!$result) { $error = 1; }
 	$result = dbquery("UPDATE ".DB_SETTINGS." SET settings_value='".stripinput($_POST['subheaderdate'])."' WHERE settings_name='subheaderdate'");
@@ -153,11 +151,6 @@ echo "<td valign='top' width='50%' class='tbl'>".$locale['452']."</td>\n";
 echo "<td width='50%' class='tbl'><select name='longdatetext' class='textbox' style='width:201px;'>\n".$date_opts."</select><br />\n";
 echo "<input type='button' name='setlongdate' value='>>' onclick=\"longdate.value=longdatetext.options[longdatetext.selectedIndex].value;longdatetext.selectedIndex=0;\" class='button' />\n";
 echo "<input type='text' name='longdate' value='".$settings2['longdate']."' maxlength='50' class='textbox' style='width:180px;' /></td>\n";
-echo "</tr>\n<tr>\n";
-echo "<td valign='top' width='50%' class='tbl'>".$locale['453']."</td>\n";
-echo "<td width='50%' class='tbl'><select name='forumdatetext' class='textbox' style='width:201px;'>\n".$date_opts."</select><br />\n";
-echo "<input type='button' name='setforumdate' value='>>' onclick=\"forumdate.value=forumdatetext.options[forumdatetext.selectedIndex].value;forumdatetext.selectedIndex=0;\" class='button' />\n";
-echo "<input type='text' name='forumdate' value='".$settings2['forumdate']."' maxlength='50' class='textbox' style='width:180px;' /></td>\n";
 echo "</tr>\n<tr>\n";
 echo "<td valign='top' width='50%' class='tbl'>".$locale['457']."</td>\n";
 echo "<td width='50%' class='tbl'><select name='newsdatetext' class='textbox' style='width:201px;'>\n".$date_opts."</select><br />\n";

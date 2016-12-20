@@ -79,12 +79,6 @@ if ($_GET['page']==3) {
 	'images/news/' => true,
 	'images/news/thumbs/' => true,
 	'images/news_cats/' => true,
-	'images/photoalbum/' => true,
-	'images/photoalbum/submissions/' => true,
-	'forum/attachments/' => true,
-	'ftp_upload/' => true,
-	'downloads/' => true,
-	'downloads/images' => true,
 	'robots.txt' => true,
 	'config.php' => false
 	);
@@ -117,8 +111,8 @@ if ($_GET['page']==4) {
 		ob_end_clean();
 		$phpinfo = preg_replace('%^.*<body>(.*)</body>.*$%ms', '$1', $phpinfo);
 		$phpinfo = preg_replace('%<h1.*>.*</h1>%', "<h3 class='tbl2'>$2</h3>", $phpinfo);
-		$phpinfo = preg_replace('%<h2><a name="(.*)">(.*)</a></h2>%', "<h4 class='phpinfo forum-caption'>$2</h4>", $phpinfo);
-		$phpinfo = preg_replace('%<h2>(.*)</h2>%', "<div class='forum-caption'>$1</div>", $phpinfo);
+		$phpinfo = preg_replace('%<h2><a name="(.*)">(.*)</a></h2>%', "<h4 class='phpinfo'>$2</h4>", $phpinfo);
+		$phpinfo = preg_replace('%<h2>(.*)</h2>%', "<div>$1</div>", $phpinfo);
 		$phpinfo = preg_replace('%<th colspan="2">(.*)</th>%', "<th colspan='2'><h5>$1</h5></th>", $phpinfo);
 		$phpinfo = str_replace('<table border="0" cellpadding="3" width="600"', "<table class='tbl-border phpinfo_cont' style='width:100%;'", $phpinfo);
 		$phpinfo = str_replace("<h3 class='tbl2'></h3>",'',$phpinfo);

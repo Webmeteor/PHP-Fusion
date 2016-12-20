@@ -144,7 +144,7 @@ function display_suspend_log($user_id, $type = "all", $rowstart = 0, $limit = 0)
 			$reason = ($data['suspend_reason'] ? ": ".$data['suspend_reason'] : "");
 			$admin = ($data['admin_name'] ? $data['admin_name']." (".$locale['susp108'].": ".$data['suspend_ip'].")" : $locale['susp109']);
 			echo "<tr><td class='$class' valign='top'>#".$data['suspend_id']."</td>\n";
-			echo "<td class='$class' valign='top'>".showdate('forumdate', $data['suspend_date'])."</td>\n";
+			echo "<td class='$class' valign='top'>".showdate('longdate', $data['suspend_date'])."</td>\n";
 			echo "<td class='$class' valign='top'><strong>$suspension</strong>$reason</td>\n";
 			echo "<td class='$class' valign='top'>$admin</td>\n";
 			echo "</tr>\n<tr>\n";
@@ -152,7 +152,7 @@ function display_suspend_log($user_id, $type = "all", $rowstart = 0, $limit = 0)
 				$r_reason = ($data['reinstate_reason'] ? ": ".$data['reinstate_reason'] : "");
 				$admin = ($data['admin_name_b'] ? $data['admin_name_b']." (".$locale['susp112'].$data['reinstate_ip'].")" : $locale['susp109']);
 				echo "<td class='$class' valign='top' align='right'>&nbsp;</td>\n";
-				echo "<td class='$class' valign='top'>".showdate('forumdate', $data['reinstate_date'])."</td>\n";
+				echo "<td class='$class' valign='top'>".showdate('longdate', $data['reinstate_date'])."</td>\n";
 				echo "<td class='$class' valign='top'>".$locale['susp113'].$r_reason."</td>\n";
 				echo "<td class='$class' valign='top'>$admin</td>\n";
 				echo "</tr>\n<tr>\n";

@@ -51,10 +51,6 @@ $fusion_images = array(
 	//E
 	"edit" 			=> IMAGES."edit.png",
 	//F
-	"folder" 		=> THEME."forum/folder.gif",
-	"folderlock" 	=> THEME."forum/folderlock.gif",
-	"foldernew" 	=> THEME."forum/foldernew.gif",
-	"forum_edit" 	=> THEME."forum/edit.gif",
 	//G
 	"go_first" 		=> IMAGES."go_first.png",
 	"go_last" 		=> IMAGES."go_last.png",
@@ -71,7 +67,6 @@ $fusion_images = array(
 	"left" 			=> THEME."images/left.gif",
 	//M
 	//N
-	"newthread" 	=> THEME."forum/newthread.gif",
 	"no" 			=> IMAGES."no.png",
 	"noavatar50" 	=> "noavatar50.png",
 	"noavatar100" 	=> "noavatar100.png",
@@ -80,27 +75,22 @@ $fusion_images = array(
 	//P
 	"panel_on" 		=> THEME."images/panel_on.gif",
 	"panel_off" 	=> THEME."images/panel_off.gif",
-	"pm" 			=> THEME."forum/pm.gif",
 	"pollbar" 		=> THEME."images/pollbar.gif",
 	"printer" 		=> IMAGES."printer.png",
 	//Q
-	"quote" 		=> THEME."forum/quote.gif",
 	//R
-	"reply" 		=> THEME."forum/reply.gif",
 	"right" 		=> THEME."images/right.gif",
 	//S
 	"save"			=> IMAGES."php-save.png",
 	"screenshot"	=> IMAGES."dl_screenshot.png",
 	"star" 			=> IMAGES."star.png",
 	"statistics"	=> IMAGES."dl_stats.png",
-	"stickythread" 	=> THEME."forum/stickythread.gif",
 	//T
 	"tick" 			=> IMAGES."tick.png",
 	//U
 	"up" 			=> THEME."images/up.gif",
 	//V
 	//W
-	"web" 			=> THEME."forum/web.gif",
 	//X
 	//Y
 	"yes" 			=> IMAGES."yes.png"

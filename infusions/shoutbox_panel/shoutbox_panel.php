@@ -186,7 +186,7 @@ if (dbrows($result)) {
 			echo $data['shout_name']."\n";
 		}
 		echo "</div>\n";
-		echo "<div class='shoutboxdate'>".showdate("forumdate", $data['shout_datestamp'])."</div>";
+		echo "<div class='shoutboxdate'>".showdate("longdate", $data['shout_datestamp'])."</div>";
 		echo "<div class='shoutbox'>".sbwrap(parseubb(parsesmileys($data['shout_message']), "b|i|u|url|color"))."</div>\n";
 		if ((iADMIN && checkrights("S")) || (iMEMBER && $data['shout_name'] == $userdata['user_id'] && isset($data['user_name']))) {
 			echo "[<a href='".$link.$sep."s_action=edit&amp;shout_id=".$data['shout_id']."#edit_shout"."' class='side'>".$locale['SB_edit']."</a>]\n";

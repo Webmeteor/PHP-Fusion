@@ -242,7 +242,7 @@ if (isset($_POST['save'])) {
 	}
 	echo "<tr>\n";
 	echo "<td valign='top' class='tbl'>".$locale['462']."<br />\n";
-	echo "<span class='small2'><em>".$locale['463']."<br />/news.php<br />/forum/index.php</em></span>";
+	echo "<span class='small2'><em>".$locale['463']."<br />/news.php</em></span>";
 	echo "</td>\n<td width='200' valign='top' class='tbl'>";
 	echo "<textarea name='panel_url_list' cols='50' rows='5' class='textbox' style='width:300px;'>".$panel_url_list."</textarea>";
 	echo "</td>\n<td valign='top' class='tbl'>";

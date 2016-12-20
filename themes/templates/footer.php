@@ -35,7 +35,6 @@ if ($settings['cronjob_hour'] < (time()-360)) {
 if ($settings['cronjob_day'] < (time()-86400)) {
 	$new_time = time();
 
-	$result = dbquery("DELETE FROM ".DB_THREAD_NOTIFY." WHERE notify_datestamp < '".(time()-1209600)."'");
 	$result = dbquery("DELETE FROM ".DB_NEW_USERS." WHERE user_datestamp < '".(time()-86400)."'");
 	$result = dbquery("DELETE FROM ".DB_EMAIL_VERIFY." WHERE user_datestamp < '".(time()-86400)."'");
 
@@ -79,9 +78,6 @@ if ($settings['cronjob_day'] < (time()-86400)) {
 				$result = dbquery("DELETE FROM ".DB_POLL_VOTES." WHERE vote_user='".$data['user_id']."'");
 				$result = dbquery("DELETE FROM ".DB_RATINGS." WHERE rating_user='".$data['user_id']."'");
 				$result = dbquery("DELETE FROM ".DB_SUSPENDS." WHERE suspended_user='".$data['user_id']."'");
-				$result = dbquery("DELETE FROM ".DB_THREADS." WHERE thread_author='".$data['user_id']."'");
-				$result = dbquery("DELETE FROM ".DB_POSTS." WHERE post_author='".$data['user_id']."'");
-				$result = dbquery("DELETE FROM ".DB_THREAD_NOTIFY." WHERE notify_user='".$data['user_id']."'");
 			}
 		}
 		if ($usr_deactivate > 10) { $new_time = $settings['cronjob_day']; }
@@ -93,6 +89,14 @@ if ($settings['cronjob_day'] < (time()-86400)) {
 // Error handling
 if (iADMIN  && checkrights("ERRO") && count($_errorHandler) > 0) {
 	echo "<div class='admin-message'>".str_replace("[ERROR_LOG_URL]", ADMIN."errors.php".$aidlink, $locale['err_101'])."</div>\n";
+}
+
+if (isset($settings['bootstrap_js_url']) && $settings['bootstrap_js_url'] != "") {
+    echo "<script type='text/javascript' src='".$settings['bootstrap_js_url']."'";
+    if (isset($settings['bootstrap_js_sri']) && $settings['bootstrap_js_sri'] != "") {
+        echo " integrity='".$settings['bootstrap_js_sri']."' crossorigin='anonymous'";
+    }
+    echo "></script>\n";
 }
 
 echo "</body>\n</html>\n";
@@ -107,5 +111,5 @@ if (ob_get_length() !== FALSE){
 	ob_end_flush();
 }
 
-mysql_close($db_connect);
+$pdo = null;
 ?>

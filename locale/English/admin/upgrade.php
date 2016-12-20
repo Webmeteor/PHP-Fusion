@@ -12,9 +12,7 @@ $locale['432'] = "User Management";
 $locale['434'] = "Items per Page";
 $locale['435'] = "Security";
 $locale['436'] = "News Settings";
-$locale['437'] = "Downloads Settings";
 // v7.02 new locales
-$locale['440'] = "Submit Download";
 $locale['441'] = "Shoutbox";
 $locale['442'] = "robots.txt";
 $locale['443'] = "User Log";

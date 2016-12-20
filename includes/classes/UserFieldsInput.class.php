@@ -472,8 +472,8 @@ class UserFieldsInput {
 		if ($this->_method == "validate_insert") {
 			$this->_setDBValue("user_hide_email", $this->_userHideEmail);
 			$this->_setDBValue("user_avatar", "");
-			$this->_setDBValue("user_posts", 0);
-			$this->_setDBValue("user_threads", 0);
+			//$this->_setDBValue("user_posts", 0);
+			//$this->_setDBValue("user_threads", 0);
 			$this->_setDBValue("user_joined", time());
 			$this->_setDBValue("user_lastvisit", 0);
 			$this->_setDBValue("user_ip", USER_IP);

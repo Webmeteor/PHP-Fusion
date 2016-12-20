@@ -25,30 +25,4 @@ function unstripinput($text) {
    $text = str_replace($search, $replace, $text);
    return $text;
 }
-
-if ((isset($_GET['thread_id']) && isnum($_GET['thread_id'])) && (isset($_GET['post_id']) && isnum($_GET['post_id'])) && (isset($_GET['code_id']) && isnum($_GET['code_id']))) {
-	$result = dbquery(
-		"SELECT fp.*, ff.* FROM ".DB_POSTS." AS fp
-		INNER JOIN ".DB_FORUMS." AS ff ON ff.forum_id=fp.forum_id
-		WHERE fp.thread_id='".$_GET['thread_id']."' AND fp.post_id='".$_GET['post_id']."'"
-	);
-	if (dbrows($result)) {
-		$data = dbarray($result);
-		if (!checkgroup($data['forum_access']) || !$data['forum_cat']) {
-			redirect(BASEDIR."forum/viewthread.php?thread_id=".$_GET['thread_id']);
-		}
-		$text = $data['post_message'];
-		preg_match_all("#\[geshi=(.*?)\](.*?)\[/geshi\]#si", $text, $matches, PREG_PATTERN_ORDER);
-		if (isset($matches[1][$_GET['code_id']]) && isset($matches[2][$_GET['code_id']])) {
-			$ext = strtolower(str_replace("4strict" ,"", $matches[1][$_GET['code_id']]));
-			$text = unstripinput($matches[2][$_GET['code_id']]);  
-			$filename = "geshi_".$_GET['thread_id']."_".$_GET['post_id']."_".$_GET['code_id'].".".$ext;
-			$object = new httpdownload;
-			$object->set_bydata($text);
-			$object->use_resume = true;
-			$object->set_filename($filename);
-			$object->download();
-		}
-	}
-}
 ?>

@@ -132,7 +132,6 @@ form {
 	line-height: 1;
 	color: #3C3C3D;
 	text-shadow: 1px 1px 0 #FFFFFF;
-	background: #ECECEC url(forum/buttons_bg.png) 0 0 no-repeat;
 	white-space: nowrap;
 	cursor: pointer;
 	overflow: visible;
@@ -331,7 +330,7 @@ div.emulated-fieldset div.attachments-list {
 
 .sub-header {
 	color: #838383;
-	width: 100%
+	width: 100%;
 	height: 42px;
 	background-color: #e6e6e8;
     background-image: -webkit-gradient(linear,50% 0,50% 100%,color-stop(0%,#f8f8f8),color-stop(100%,#e6e6e6));
@@ -350,7 +349,7 @@ div.emulated-fieldset div.attachments-list {
 	padding-left: 9px;
     display: -moz-box;
     display: -webkit-box;
-    display: box;
+    display: block;
 	clear: both;
 }
 
@@ -439,9 +438,9 @@ div.emulated-fieldset div.attachments-list {
 	background-color: #1185c7;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
-   -moz-border-radius-topleft 3px;
+   -moz-border-radius-topleft: 3px;
    -moz-border-radius-topright: 3px;
-   -webkit-border-radius-topleft 3px;
+   -webkit-border-radius-topleft: 3px;
    -webkit-border-radius-topright: 3px;
 	padding: 6px;
 }
@@ -454,9 +453,9 @@ div.emulated-fieldset div.attachments-list {
 	background-image: url(images/subfooter-mid.gif);
 	border-bottom-left-radius: 3px;
 	border-bottom-right-radius: 3px;
-   -moz-border-radius-bottomleft 3px;
+   -moz-border-radius-bottomleft: 3px;
    -moz-border-radius-bottomright: 3px;
-   -webkit-border-radius-bottomleft 3px;
+   -webkit-border-radius-bottomleft: 3px;
    -webkit-border-radius-bottomright: 3px;
 	border: 1px solid #d9d9d9;
 	border-top:0;
@@ -499,9 +498,9 @@ div.side-right { /* when the right panel is on the margins will help side-center
 	background-color: #fff;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
-   -moz-border-radius-topleft 3px;
+   -moz-border-radius-topleft: 3px;
    -moz-border-radius-topright: 3px;
-   -webkit-border-radius-topleft 3px;
+   -webkit-border-radius-topleft: 3px;
    -webkit-border-radius-topright: 3px;
     border: 1px solid #ddd;
 	padding: 6px;
@@ -552,9 +551,9 @@ div.side-both { /* when the left and right side panels are on, this class will k
 	background-color: #fff;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
-   -moz-border-radius-topleft 3px;
+   -moz-border-radius-topleft: 3px;
    -moz-border-radius-topright: 3px;
-   -webkit-border-radius-topleft 3px;
+   -webkit-border-radius-topleft: 3px;
    -webkit-border-radius-topright: 3px;
     border: 1px solid #ddd;
 	padding: 6px;
@@ -833,63 +832,6 @@ div.highlightBlue::-moz-selection { color: #fff; background: #e5c011; } /* mozil
 .news_info li.print a span {
 	position: absolute;
 	left: -5000px;
-}
-
-/* Forum table properties */
-
-.forum-caption {
-	font-size: 11px;
-	font-weight: bold;
-	color: #888;
-	background-color: #f1f1f1;
-	padding: 2px 4px 4px 4px;
-	margin-bottom: 10px;
-}
-
-.forum_breadcrumbs {
-    font-family: Arial, Verdana, Helvetica, sans-serif;
-	font-size: 12px;
-	font-style: italic;
-	font-weight: normal;
-	background: #fff4cc url(images/right.png) 6px 5px no-repeat;
-	border-top: 1px solid #ffdc70;
-	border-bottom: 1px solid #ffdc70;
-	padding: 5px 6px 5px 30px;
-	margin: 0;
-}
-
-.forum_thread_user_post {
-    background-color: #fff;
-	border-top: 2px dashed #eee;
-	border-bottom: 2px dashed #eee;
-}
-
-.forum_thread_user_info {
-    background-color: #eee;
-	border-top: 2px dashed #fff;
-	border-right: 2px dashed #fff;
-	border-bottom: 2px dashed #fff;
-}
-
-.forum_thread_table {
-    border-spacing: 0;
-	border: 0;
-}
-
-.forum_thread_user_name {
-    border-top: 2px dashed #fff;
-}
-
-.forum_thread_post_date {
-    border-top: 2px dashed #fff;
-}
-
-.forum_thread_ip {
-	border-bottom: 2px dashed #fff;
-}
-
-.forum_thread_userbar {
-	border-bottom: 2px dashed #fff;
 }
 
 /* Profile spesific classes */

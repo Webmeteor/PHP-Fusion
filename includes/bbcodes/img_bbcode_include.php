@@ -25,7 +25,7 @@ if (!function_exists("img_bbcode_callback")) {
 			$avdata = @getimagesize("$matches[1]$matches[3]$matches[4]");
 			if (isset($avdata["mime"]))
 			{
-				return "<span style='display: block; max-width: 300px; max-height: 300px; overflow: auto;' class='forum-img-wrapper'><img src='".$matches[1].str_replace(array("?","&amp;","&","="), "", $matches[3]).$matches[4]."' alt='".$matches[3].$matches[4]."' style='border:0px' class='forum-img' /></span>";
+				return "<span style='display: block; max-width: 300px; max-height: 300px; overflow: auto;' class='img-wrapper'><img src='".$matches[1].str_replace(array("?","&amp;","&","="), "", $matches[3]).$matches[4]."' alt='".$matches[3].$matches[4]."' style='border:0px' class='img' /></span>";
 			}
 			else
 			{

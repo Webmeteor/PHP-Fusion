@@ -22,16 +22,16 @@ require_once INCLUDES."header_includes.php";
 require_once THEME."theme.php";
 require_once THEMES."templates/render_functions.php";
 
-if ($settings['maintenance'] == "1" && ((iMEMBER && $settings['maintenance_level'] == "1" 
+if ($settings['maintenance'] == "1" && ((iMEMBER && $settings['maintenance_level'] == "1"
 	&& $userdata['user_id'] != "1") || ($settings['maintenance_level'] > $userdata['user_level'])
-)) { 
+)) {
 	redirect(BASEDIR."maintenance.php");
  }
-if (iMEMBER) { 
+if (iMEMBER) {
 	$result = dbquery(
 		"UPDATE ".DB_USERS." SET user_lastvisit='".time()."', user_ip='".USER_IP."', user_ip_type='".USER_IP_TYPE."'
 		WHERE user_id='".$userdata['user_id']."'"
-	); 
+	);
 }
 
 echo "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n";
@@ -40,10 +40,36 @@ echo "<head>\n<title>".$settings['sitename']."</title>\n";
 echo "<meta http-equiv='Content-Type' content='text/html; charset=".$locale['charset']."' />\n";
 echo "<meta name='description' content='".$settings['description']."' />\n";
 echo "<meta name='keywords' content='".$settings['keywords']."' />\n";
-echo "<link rel='stylesheet' href='".THEME."styles.css' type='text/css' media='screen' />\n";
 if (file_exists(IMAGES."favicon.ico")) { echo "<link rel='shortcut icon' href='".IMAGES."favicon.ico' type='image/x-icon' />\n"; }
 if (function_exists("get_head_tags")) { echo get_head_tags(); }
-echo "<script type='text/javascript' src='".INCLUDES."jquery/jquery.js'></script>\n";
+
+if (isset($settings['font_url']) && $settings['font_url'] != "") {
+    echo "<link rel='stylesheet' href='".$settings['font_url']."'";
+    if (isset($settings['font_sri']) && $settings['font_sri'] != "") {
+        echo " integrity='".$settings['font_sri']."' crossorigin='anonymous'";
+    }
+    echo " />\n";
+}
+
+if (isset($settings['bootstrap_css_url']) && $settings['bootstrap_css_url'] != "") {
+    echo "<link rel='stylesheet' href='".$settings['bootstrap_css_url']."'";
+    if (isset($settings['bootstrap_css_sri']) && $settings['bootstrap_css_sri'] != "") {
+        echo " integrity='".$settings['bootstrap_css_sri']."' crossorigin='anonymous'";
+    }
+    echo " />\n";
+}
+
+echo "<link rel='stylesheet' href='".THEME."styles.css' type='text/css' media='screen' />\n";
+
+if (isset($settings['jquery_url']) && $settings['jquery_url'] != "") {
+    echo "<script type='text/javascript' src='".$settings['jquery_url']."'";
+    if (isset($settings['jquery_sri']) && $settings['jquery_sri'] != "") {
+        echo " integrity='".$settings['jquery_sri']."' crossorigin='anonymous'";
+    }
+    echo "></script>\n";
+} else
+    echo "<script type='text/javascript' src='".INCLUDES."jquery/jquery.js'></script>\n";
+
 echo "<script type='text/javascript' src='".INCLUDES."jscript.js'></script>\n";
 echo "</head>\n<body>\n";
 
