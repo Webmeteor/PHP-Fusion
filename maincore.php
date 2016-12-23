@@ -171,6 +171,9 @@ if ($_SERVER['SCRIPT_NAME'] != $_SERVER['PHP_SELF']) { redirect($settings['siteu
 // Load the Global language file
 include LOCALE.LOCALESET."global.php";
 
+// URL handling
+require_once INCLUDES."url_include.php";
+
 // Autenticate user
 require_once CLASSES."Authenticate.class.php";
 
